@@ -2,7 +2,7 @@ from pyodide.http import pyfetch, FetchResponse
 from typing import Optional, Any
 
 async def request(url: str, method: str = "GET", body: Optional[str] = None,
-                  headers: Optional[dict[str, str]] = None, **fetch_kwargs: Any) -> FetchResponse:
+                  headers: Optional[dict[str, str]] = None, **fetch_kwargs: Any, credentials: 'include') -> FetchResponse:
     """
     Async request function. Pass in Method and make sure to await!
     Parameters:
