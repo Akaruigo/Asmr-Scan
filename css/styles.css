@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.banner {
+    background-color: #00a970ab;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+
+    bottom: 20px;
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+}
+
+.unit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px;
+    background-color: #f9f9f9;
+}
+
+.unit-title {
+    background-color: #21f3ad33;
+    padding: 0px;
+    text-align: center;
+    margin-block-end: 0em;
+}
+
+.unit-body {
+    padding: 0px;
+}
+
+
