@@ -1,0 +1,112 @@
+var videoIndex = 0; // 当前页数索引
+var videosPerPage = 5; // 每页显示的视频数量
+var urlnumList = []; // 存放从urlnumfile.txt读取的urlnum数组
+var token = ""; // 存放从nowtoken.txt读取的token值
+
+// 通过fetch函数异步读取urlnumfile.txt和nowtoken.txt的内容
+Promise.all([
+    fetch('urlnumfile.txt').then(response => response.text()),
+    fetch('nowtoken.txt').then(response => response.text())
+]).then(data => {
+    urlnumList = data[0].trim().split('\n');
+    token = data[1].trim();
+    showVideos();
+});
+
+// 显示当前页的视频
+function showVideos() {
+    var start = videoIndex * videosPerPage;
+    var end = start + videosPerPage;
+    for (var i = start; i < end && i < urlnumList.length; i++) {
+        var playerContainerId = "mui-player" + (i - start + 1);
+        var videoSrc = generateVideoSource(urlnumList[i], token);
+        setupPlayer(playerContainerId, videoSrc);
+    }
+}
+
+// 生成视频的完整链接
+function generateVideoSource(urlnum, token) {
+    return 'https://cdn9527.55661.cn:4433/73sm/asmr/' + urlnum + '/hls.m3u8?token=' + token;
+}
+
+// 设置播放器配置
+function setupPlayer(containerId, videoSrc) {
+    var mp = new MuiPlayer({
+        container: document.getElementById(containerId),
+        src: videoSrc,
+        parse: {
+            type: 'hls',
+            loader: Hls,
+        },
+    });
+};
+
+// 生成视频标题
+function generateVideoTitle(urlnum) {
+    var timestamp = parseInt(urlnum);
+    var date = new Date(timestamp * 1000); // 转换为毫秒级时间戳
+    var formattedDate = date.toISOString().substring(0, 19).replace("T", " "); // 将ISO日期格式转换为指定格式
+    return urlnum + " # " + formattedDate;
+}
+
+// 显示当前页信息
+function updateCurrentPageInfo() {
+    var currentPage = videoIndex + 1;
+    var totalPages = Math.ceil(urlnumList.length / videosPerPage);
+    document.getElementById("currentPageInfo").innerText = "当前为第" + currentPage + "页，共" + totalPages + "页";
+}
+
+// 更新视频播放器和标题
+function updateVideoPlayersAndTitles() {
+    showVideos();
+    updateCurrentPageInfo();
+
+    // 更新视频标题和标签区域
+    var start = videoIndex * videosPerPage;
+    var end = start + videosPerPage;
+    for (var i = start; i < end && i < urlnumList.length; i++) {
+        var videoTitleText = generateVideoTitle(urlnumList[i]);
+        var unitTitleElement = document.getElementById("unit-title-" + (i - start + 1));
+        if (unitTitleElement) {
+            unitTitleElement.innerText = videoTitleText;
+            };
+        }
+    }
+
+// 上一页按钮点击事件
+document.getElementById("prevButton").onclick = function () {
+    if (videoIndex > 0) {
+        videoIndex--;
+        updateVideoPlayersAndTitles();
+    }
+};
+
+// 下一页按钮点击事件
+document.getElementById("nextButton").onclick = function () {
+    if (videoIndex < Math.ceil(urlnumList.length / videosPerPage) - 1) {
+        videoIndex++;
+        updateVideoPlayersAndTitles();
+    }
+};
+
+// 跳转按钮点击事件
+document.getElementById("jumpButton").onclick = function () {
+    var pageNumberInput = document.getElementById("pageNumberInput").value;
+    var parsedPageNumber = parseInt(pageNumberInput);
+    if (!isNaN(parsedPageNumber) && parsedPageNumber >= 1 && parsedPageNumber <= Math.ceil(urlnumList.length / videosPerPage)) {
+        videoIndex = parsedPageNumber - 1;
+        updateVideoPlayersAndTitles();
+    } else {
+        alert("请输入有效的页码！");
+    }
+};
+
+// 异步加载并初始化页面
+Promise.all([
+    fetch('urlnumfile.txt').then(response => response.text()),
+    fetch('nowtoken.txt').then(response => response.text())
+]).then(data => {
+    urlnumList = data[0].trim().split('\n');
+    token = data[1].trim();
+    updateVideoPlayersAndTitles();
+});
