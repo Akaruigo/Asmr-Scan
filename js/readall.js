@@ -2,14 +2,17 @@ var videoIndex = 0; // 当前页数索引
 var videosPerPage = 5; // 每页显示的视频数量
 var urlnumList = []; // 存放从urlnumfile.txt读取的urlnum数组
 var token = ""; // 存放从nowtoken.txt读取的token值
+var infoList = []; // 存放从info.txt读取的info数组
 
 // 通过fetch函数异步读取urlnumfile.txt和nowtoken.txt的内容
 Promise.all([
     fetch('urlnumfile.txt').then(response => response.text()),
-    fetch('nowtoken.txt').then(response => response.text())
+    fetch('nowtoken.txt').then(response => response.text()),
+    fetch('info.txt').then(response => response.text()),
 ]).then(data => {
     urlnumList = data[0].trim().split('\n');
     token = data[1].trim();
+    infoList = data[2].trim().split('\n');
     showVideos();
 });
 
@@ -56,6 +59,19 @@ function updateCurrentPageInfo() {
     document.getElementById("currentPageInfo").innerText = "当前为第" + currentPage + "页，共" + totalPages + "页";
 }
 
+// 显示info.txt内容
+function showInfo() {
+    var leftTopElement = document.querySelector(".left-top");
+    var leftBottomElement = document.querySelector(".left-bottom");
+    var rightTopElement = document.querySelector(".right-top");
+    var rightBottomElement = document.querySelector(".right-bottom");
+
+    leftTopElement.textContent = infoList[0];
+    leftBottomElement.textContent = infoList[1];
+    rightTopElement.textContent = infoList[2];
+    rightBottomElement.textContent = infoList[3];
+}
+
 // 更新视频播放器和标题
 function updateVideoPlayersAndTitles() {
     showVideos();
@@ -69,9 +85,11 @@ function updateVideoPlayersAndTitles() {
         var unitTitleElement = document.getElementById("unit-title-" + (i - start + 1));
         if (unitTitleElement) {
             unitTitleElement.innerText = videoTitleText;
-            };
         }
     }
+    // 显示info.txt内容
+    showInfo();
+}
 
 // 上一页按钮点击事件
 document.getElementById("prevButton").onclick = function () {
