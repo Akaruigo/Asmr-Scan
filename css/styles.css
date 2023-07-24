@@ -8,10 +8,11 @@ body {
     background-color: #00a970ab;
     color: #fff;
     text-align: center;
-    padding: 10px;
-
-    bottom: 20px;
+    padding: 0px;
+    bottom: 0px;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .content {
@@ -38,6 +39,15 @@ body {
 
 .unit-body {
     padding: 0px;
+}
+
+.under-banner {
+    background-color: #00a970ab;
+    color: #fff;
+    text-align: center;
+    padding: 0px;
+    bottom: 0px;
+    width: 100%;
 }
 
 
