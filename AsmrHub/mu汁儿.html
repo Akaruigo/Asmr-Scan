@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+    <html lang = "en" >
+    
+    <head>
+    		<meta charset='utf-8' />
+    		<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no" />
+    		<meta http-equiv="Cache-Control" content="no-siteapp" />
+    		<meta http-equiv="Cache-Control" content="no-transform" />
+    		<meta name="applicable-device" content="mobile">
+    		<meta name="apple-mobile-web-app-capable" content="yes" />
+    		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    		<link href="https://m.tuiimg.com/css/style.css" rel="stylesheet" type="text/css" />
+    		<title>ASMR Hub</title>
+    </head>
+    
+    <body>
+    
+    <!---左侧菜单栏-->
+    <div class="nav" id="nav">
+       <ul>
+          <li><a href="./fdiv/readme.html">使用说明</a></li>
+          <li><h1><a href="./fdiv/Asmr-Start.html">ASMR福利镜像站</a></h1></li>
+          <li><a href="./fdiv/resource.html">ASMR资源下载</a></li>
+    	  <li><a href="./fdiv/tag.html">收录资源统计</a></li>
+    	  <li><a href="./fdiv/nopage.html">预留页面...</a></li>
+       </ul>
+    </div>
+    <!---顶部栏-->
+    <div id="container">
+       <div class="header">
+          <div class="menu"><img src="https://m.tuiimg.com/images/menu.png" id="openmenu" /></div>
+          <div class="logo"><a href="https://akaruigo.github.io/Asmr-Scan/">主播分页-mu汁儿</a></div>
+       </div>
+    <!---浏览页每页20个视频-->
+       <ul class="main" id="main">
+    		<li><h2><a href="https://cdn3.sydwzpks.com:4433/duoda/257/index.m3u8">舔耳福利 @ mu汁儿ASMR</a></h2><a href="https://cdn3.sydwzpks.com:4433/duoda/257/index.m3u8"><img src="https://nas.qqdzzb.win/imgs/2020/10/af2b4b210d3c7fdc.jpg" realsrc="https://nas.qqdzzb.win/imgs/2020/10/af2b4b210d3c7fdc.jpg" alt="舔耳福利 @ mu汁儿ASMR" /></a><p><span>2020-06-30 14:49:51 No.593</span><span class="love"><a href="mu汁儿.html">mu汁儿(1)</a></span></p></li>
+
+        </ul>
+    		
+            <!--底部页面选择-->
+            <div class="page">
+            <a href="https://m.tuiimg.com/meinv/" class="end">美图</a>
+    		<a href="https://asmr1.com" class="end">Asmr1</a>
+    		<a href="https://www.ufov8.com/" class="end">Asmr2</a>	
+    		<a href="https://www.asmrqq.com/" class="end">Asmr3</a>
+    		<a href="./fdiv/Asmr-Start.html" class="end">主页</a>
+    		<a href="https://m.zhangyue.com/chapter/10138912" class="end">休息</a>
+    		</div>  
+    	
+    	   <!---回到顶部按钮及声明-->
+    		<div id="gotop"></div>
+    		<div class="footer">所有资源取自于神木资源网，版权问题与本站无关 &copy; <a href="https://www.733sm.com/">神木资源网</a></div>
+       </div>
+       <script type="text/javascript" src="https://m.tuiimg.com/css/tuiimg.js"></script>
+       <script type="text/javascript">
+        window.addEventListener("load", function () {
+            // 异步获取token的值
+            fetch("../nowtoken.txt")
+                .then(response => response.text())
+                .then(token => {
+                    const links = document.querySelectorAll("a[href$='hls.m3u8']");
+                    links.forEach(link => {
+                        link.href = link.href + "?token=" + token;
+                    });
+                })
+                .catch(error => {
+                    console.error("Failed to fetch token:", error);
+                });
+        });
+    </script>
+    </body>
+    </html>
