@@ -53,6 +53,8 @@ body {
     padding: 0px;
     text-align: center;
     margin-block-end: 0em;
+    font-size: 5px;
+    color: #ff760033;
 }
 
 .unit-body {
