@@ -12,7 +12,10 @@ body {
     bottom: 0px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
 }
 
 .bannerbox {
@@ -51,7 +54,7 @@ body {
     background-color: #00a970ab;
     color: #fff;
     text-align: center;
-    padding: 0px;
+    padding: 5px;
     bottom: 0px;
     width: 100%;
 }
