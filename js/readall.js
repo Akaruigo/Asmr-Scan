@@ -55,10 +55,11 @@ function setupPlayer(containerId, videoSrc) {
 // 生成视频标题
 function generateVideoTitle(urlnum) {
     var timestamp = parseInt(urlnum);
+    var cleanedString = timestamp.toString()
     var reltimestamp = timestamp + 3600 * 8;
     var date = new Date(reltimestamp * 1000); // 转换为毫秒级时间戳
     var formattedDate = date.toISOString().substring(0, 19).replace("T", " "); // 将ISO日期格式转换为指定格式
-    return urlnum + " # " + formattedDate;
+    return cleanedString + " # " + formattedDate;
 }
 
 // 显示当前页信息
