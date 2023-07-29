@@ -24,6 +24,15 @@ body {
   box-sizing: border-box; /* 避免边框宽度影响盒子宽度 */   
 }
 
+.bannerbox a{
+        text-decoration: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* 为了增强立体感，您还可以设置为斜体或指定合适的字体 */
+        font-style: italic;
+        font-family: '微软雅黑', sans-serif;
+        color: #FFFF00;
+}
+
 .content {
     display: flex;
     flex-direction: column;
