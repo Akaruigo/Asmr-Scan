@@ -11,7 +11,7 @@ Promise.all([
     fetch('info.txt').then(response => response.text()),
 ]).then(data => {
     urlnumList = data[0].trim().split('\n');
-    token = data[1].token; // 从 JSON 响应中提取 token 值
+    token = data[1].trim();
     infoList = data[2].trim().split('\n');
     showVideos();
 });
