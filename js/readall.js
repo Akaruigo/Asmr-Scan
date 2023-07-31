@@ -7,11 +7,11 @@ var infoList = []; // 存放从info.txt读取的info数组
 // 通过fetch函数异步读取urlnumfile.txt和nowtoken.txt的内容
 Promise.all([
     fetch('urlnumfile.txt').then(response => response.text()),
-    fetch('http://akaruigo.51server.top/nowtoken.txt').then(response => response.text()),
+    fetch('gettoken_api.php').then(response => response.json()), // 从 API 获取 JSON 响应
     fetch('info.txt').then(response => response.text()),
 ]).then(data => {
     urlnumList = data[0].trim().split('\n');
-    token = data[1].trim();
+    token = data[1].token; // 从 JSON 响应中提取 token 值
     infoList = data[2].trim().split('\n');
     showVideos();
 });
