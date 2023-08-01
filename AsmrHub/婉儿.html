@@ -13,7 +13,8 @@
     		<title>ASMR Hub</title>
     </head>
     
-    <body>
+    <body> 
+	
     
     <!---左侧菜单栏-->
     <div class="nav" id="nav">
@@ -141,7 +142,7 @@
             fetch("../nowtoken.txt")
                 .then(response => response.text())
                 .then(token => {
-                    const links = document.querySelectorAll("a[href$='hls.m3u8']");
+                    const links = document.querySelectorAll("a[href$='.m3u8']");
                     links.forEach(link => {
                         link.href = link.href + "?token=" + token;
                     });
