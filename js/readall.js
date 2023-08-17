@@ -45,6 +45,7 @@ function setupPlayer(containerId, videoSrc) {
     var mp = new MuiPlayer({
         container: document.getElementById(containerId),
         src: videoSrc,
+        preload: "auto",
         parse: {
             type: 'hls',
             loader: Hls,
