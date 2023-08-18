@@ -13,7 +13,7 @@ Promise.all([
     urlnumList = data[0].trim().split('\n');
     token = data[1].trim();
     infoList = data[2].trim().split('\n');
-    showVideos();
+    //showVideos();
 });
 
 // 显示当前页的视频
