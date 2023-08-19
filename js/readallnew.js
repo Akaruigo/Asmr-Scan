@@ -57,7 +57,7 @@ function setupPlayer(containerId, videoSrc) {
         const EVENTS = window.Player.Events
         player.on(EVENTS.LOADED_DATA, () => {
             player.pause(); // 暂停视频播放
-            player.seek(0.3); //跳转
+            player.seek(1); //跳转
             //替换播放链接
             //player.switchURL('替换的url');
         })
