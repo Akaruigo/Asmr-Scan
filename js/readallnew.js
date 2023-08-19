@@ -46,18 +46,18 @@ function setupPlayer(containerId, videoSrc) {
           "id": containerId,
           "url": videoSrc,
           "playsinline": false,
-          "poster": " ",
           "plugins": [],
+          "autoplay": false,
           "fluid": true,
           "pip": true,
           "volume": 1
         }
         config.plugins.push(HlsPlayer)
-        const player = new Player(config);
+        player = new Player(config);
         const EVENTS = window.Player.Events
         player.on(EVENTS.LOADED_DATA, () => {
-            //跳转
-            player.seek(0.3);
+            player.pause(); // 暂停视频播放
+            player.seek(0.3); //跳转
             //替换播放链接
             //player.switchURL('替换的url');
         })
@@ -115,6 +115,7 @@ function updateVideoPlayersAndTitles() {
 // 上一页按钮点击事件
 document.getElementById("prevButton").onclick = function () {
     if (videoIndex > 0) {
+        player.destroy(false);
         videoIndex--;
         updateVideoPlayersAndTitles();
     }
@@ -123,6 +124,7 @@ document.getElementById("prevButton").onclick = function () {
 // 下一页按钮点击事件
 document.getElementById("nextButton").onclick = function () {
     if (videoIndex < Math.ceil(urlnumList.length / videosPerPage) - 1) {
+        player.destroy(false);
         videoIndex++;
         updateVideoPlayersAndTitles();
     }
@@ -133,6 +135,7 @@ document.getElementById("jumpButton").onclick = function () {
     var pageNumberInput = document.getElementById("pageNumberInput").value;
     var parsedPageNumber = parseInt(pageNumberInput);
     if (!isNaN(parsedPageNumber) && parsedPageNumber >= 1 && parsedPageNumber <= Math.ceil(urlnumList.length / videosPerPage)) {
+        player.destroy(false);
         videoIndex = parsedPageNumber - 1;
         updateVideoPlayersAndTitles();
     } else {
