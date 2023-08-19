@@ -13,6 +13,7 @@ Promise.all([
     urlnumList = data[0].trim().split('\n');
     token = data[1].trim();
     infoList = data[2].trim().split('\n');
+    updateVideoPlayersAndTitles();
 });
 
 // 显示当前页的视频
@@ -138,13 +139,3 @@ document.getElementById("jumpButton").onclick = function () {
         alert("请输入有效的页码！");
     }
 };
-
-// 异步加载并初始化页面
-Promise.all([
-    fetch('urlnumfile.txt').then(response => response.text()),
-    fetch('nowtoken.txt').then(response => response.text())
-]).then(data => {
-    urlnumList = data[0].trim().split('\n');
-    token = data[1].trim();
-    updateVideoPlayersAndTitles();
-});
