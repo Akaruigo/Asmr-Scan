@@ -3,11 +3,13 @@ var videosPerPage = 5; // 每页显示的视频数量
 var urlnumList = []; // 存放从urlnumfile.txt读取的urlnum数组
 var token = ""; // 存放从nowtoken.txt读取的token值
 var infoList = []; // 存放从info.txt读取的info数组
+var playerInstances = [];
+var evenInstances = [];
 
 // 通过fetch函数异步读取urlnumfile.txt和nowtoken.txt的内容
 Promise.all([
     fetch('urlnumfile.txt').then(response => response.text()),
-    fetch('nowtoken.txt').then(response => response.text()), 
+    fetch('nowtoken.txt').then(response => response.text()),
     fetch('info.txt').then(response => response.text()),
 ]).then(data => {
     urlnumList = data[0].trim().split('\n');
@@ -46,6 +48,7 @@ function setupPlayer(containerId, videoSrc) {
           "id": containerId,
           "url": videoSrc,
           "playsinline": false,
+          "poster": " ",
           "plugins": [],
           "autoplay": false,
           "fluid": true,
@@ -53,15 +56,19 @@ function setupPlayer(containerId, videoSrc) {
           "volume": 1
         }
         config.plugins.push(HlsPlayer)
-        player = new Player(config);
-        const EVENTS = window.Player.Events
+        let player = new Player(config);
+        playerInstances.push(player); // 将播放器实例添加到数组中
+        console.log('setup');
+        let EVENTS = window.Player.Events;
+        evenInstances.push(EVENTS);
         player.on(EVENTS.LOADED_DATA, () => {
-            player.pause(); // 暂停视频播放
             player.seek(1); //跳转
-            player.pause(); // 暂停视频播放
+            console.log('seek');
+            player.pause();
             //替换播放链接
             //player.switchURL('替换的url');
-        })
+            }
+        );
 };
 
 // 生成视频标题
@@ -116,7 +123,6 @@ function updateVideoPlayersAndTitles() {
 // 上一页按钮点击事件
 document.getElementById("prevButton").onclick = function () {
     if (videoIndex > 0) {
-        player.destroy(false);
         videoIndex--;
         updateVideoPlayersAndTitles();
     }
@@ -125,7 +131,14 @@ document.getElementById("prevButton").onclick = function () {
 // 下一页按钮点击事件
 document.getElementById("nextButton").onclick = function () {
     if (videoIndex < Math.ceil(urlnumList.length / videosPerPage) - 1) {
-        player.destroy(false);
+        // 销毁所有播放器
+        for (var i = 0; i < playerInstances.length; i++) {
+            playerInstances[i].destroy(false);
+            //playerInstances[i].reload();
+            console.log('destroy');
+        }
+        playerInstances = []; // 清空数组
+        evenInstances = [];
         videoIndex++;
         updateVideoPlayersAndTitles();
     }
@@ -136,7 +149,6 @@ document.getElementById("jumpButton").onclick = function () {
     var pageNumberInput = document.getElementById("pageNumberInput").value;
     var parsedPageNumber = parseInt(pageNumberInput);
     if (!isNaN(parsedPageNumber) && parsedPageNumber >= 1 && parsedPageNumber <= Math.ceil(urlnumList.length / videosPerPage)) {
-        player.destroy(false);
         videoIndex = parsedPageNumber - 1;
         updateVideoPlayersAndTitles();
     } else {
