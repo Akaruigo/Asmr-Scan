@@ -54,7 +54,10 @@ function setupPlayer(containerId, videoSrc) {
           "fluid": true,
           "closeVideoTouch": true,
           "pip": true,
-          "volume": 1
+          "volume": 1,
+          "rotate": {
+              "clockwise": true,
+              "innerRotate": true
         }
         config.plugins.push(HlsPlayer)
         let player = new Player(config);
