@@ -44,6 +44,7 @@ function generateVideoSource(urlnum, token) {
 
 // 设置播放器配置
 function setupPlayer(containerId, videoSrc) {
+    const HlsPlayer = window.HlsPlayer;
     const config = {
           "id": containerId,
           "url": videoSrc,
