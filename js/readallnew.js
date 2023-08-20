@@ -62,8 +62,8 @@ function setupPlayer(containerId, videoSrc) {
         let EVENTS = window.Player.Events;
         evenInstances.push(EVENTS);
         player.on(EVENTS.LOADED_DATA, () => {
-            //player.seek(1); //跳转
-            player.play();
+            player.seek(1); //跳转
+            //player.play();
             console.log('seek');
             player.pause();
             //替换播放链接
