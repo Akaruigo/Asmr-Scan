@@ -52,6 +52,7 @@ function setupPlayer(containerId, videoSrc) {
           "plugins": [],
           "autoplay": false,
           "fluid": true,
+          "closeVideoTouch": true,
           "pip": true,
           "volume": 1
         }
