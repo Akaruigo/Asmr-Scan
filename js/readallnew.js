@@ -134,8 +134,8 @@ document.getElementById("nextButton").onclick = function () {
     if (videoIndex < Math.ceil(urlnumList.length / videosPerPage) - 1) {
         // 销毁所有播放器
         for (var i = 0; i < playerInstances.length; i++) {
-            playerInstances[i].destroy(false);
-            //playerInstances[i].reload();
+            playerInstances[i].stop();
+            playerInstances[i] = null;
             console.log('destroy');
         }
         playerInstances = []; // 清空数组
