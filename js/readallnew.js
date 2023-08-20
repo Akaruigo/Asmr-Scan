@@ -58,7 +58,7 @@ function setupPlayer(containerId, videoSrc) {
           "rotate": {
               "clockwise": true,
               "innerRotate": true
-        }
+        }}
         config.plugins.push(HlsPlayer)
         let player = new Player(config);
         playerInstances.push(player); // 将播放器实例添加到数组中
