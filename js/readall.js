@@ -32,7 +32,7 @@ function generateVideoSource(urlnum, token) {
     // 判断urlnum的大小
     if (urlnum > 1688187760) {
         // 如果urlnum大于X，则将字符串中的asmr换成asmr2
-        return 'https://cdn9527.55661.cn:4433/73sm/asmr2/' + urlnum + '/hls.m3u8?token=' + token;
+        return 'https://jd.gjele.cn:4433/73sm/asmr2/' + urlnum + '/hls.m3u8?token=' + token;
     } else {
         // 如果urlnum小于等于688，则保持原样
         return 'https://cdn9527.55661.cn:4433/73sm/asmr/' + urlnum + '/hls.m3u8?token=' + token;
